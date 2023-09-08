@@ -9,6 +9,8 @@ on:
 env:
   # CMAKE_GENERATOR: Ninja
   VCPKG_ROOT: "$VCPKG_INSTALLATION_ROOT"
+  CMAKE_TOOLCHAIN_FILE: "$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
+  CMAKE_BUILD_TYPE: "Release"
 
 jobs:
   build:
@@ -28,7 +30,7 @@ jobs:
             vcpkg install
 
       - name: Build project
-        run: cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_ROOT }}/scripts/buildsystems/vcpkg.cmake -DCMAKE_BUILD_TYPE=Release && cmake --build build -j
+        run: cmake -B build -S . && cmake --build build -j
 
       - name: Package project
         run: |
