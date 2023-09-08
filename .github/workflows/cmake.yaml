@@ -15,9 +15,10 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - name: Print Ninja version
-        run: |
-            ninja --version
+      #  Ninja is not exist on ci.
+      # - name: Print Ninja version
+      #   run: |
+      #       ninja --version
 
       - name: Directly invoke `vcpkg install`
         run: |
