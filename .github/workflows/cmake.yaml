@@ -51,8 +51,8 @@ jobs:
         run: |
            echo "CMAKE_TOOLCHAIN_FILE=$VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" >> $GITHUB_ENV
            echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
-           echo "CMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}" >> $GITHUB_ENV
-           echo "CMAKE_C_COMPILER=${{ matrix.c_compiler }}" >> $GITHUB_ENV
+           echo "CXX=${{ matrix.cpp_compiler }}" >> $GITHUB_ENV
+           echo "CC=${{ matrix.c_compiler }}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
         with:
