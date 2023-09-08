@@ -9,7 +9,7 @@ on:
 env:
   # CMAKE_GENERATOR: Ninja
   VCPKG_ROOT: "$VCPKG_INSTALLATION_ROOT"
-  CMAKE_TOOLCHAIN_FILE: "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+  CMAKE_TOOLCHAIN_FILE: "${VCPKG_INSTALLATION_ROOT}/scripts/buildsystems/vcpkg.cmake"
   CMAKE_BUILD_TYPE: "Release"
 
 jobs:
