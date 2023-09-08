@@ -1,0 +1,29 @@
+name: install ninja
+on:
+  push:
+    branches: [ install-ninja ]
+  workflow_dispatch:
+
+env:
+  # CMAKE_GENERATOR: Ninja   #  Ninja is not exist on ci.
+  SAY_HELLO_TO_NOT_USED: "Release"
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
+      fail-fast: true
+
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+      - id: installing
+        uses: kimidaisuki22/action-install-ninja@v1
+
+      - name: Print Ninja version
+        run: |
+            ninja --version
