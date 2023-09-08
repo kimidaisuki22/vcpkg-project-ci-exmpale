@@ -3,7 +3,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 project("No_name")
 
-add_compile_options("/utf-8")
+if(MSVC)
+add_compile_options("/utf-8") # Fix fmt header that container utf-8 character, SAD
+endif()
 
 find_package(fmt CONFIG REQUIRED)
 add_executable(main main.cpp)
