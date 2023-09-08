@@ -18,4 +18,4 @@ install(TARGETS main
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
  )
 
-include(Cpack)
+include(CPack)
