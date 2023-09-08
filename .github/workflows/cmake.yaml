@@ -15,12 +15,16 @@ jobs:
         with:
           submodules: 'recursive'
 
+      - name: Print Ninja version
+        run: |
+            ninja --version
+
       - name: Directly invoke `vcpkg install`
         run: |
             vcpkg install
 
       - name: Build project
-        run: cmake -B build -S . -G Ninja -DCMAKE_BUILD_TYPE=Release && cmake --build build -j
+        run: cmake -B build -S .  -DCMAKE_BUILD_TYPE=Release && cmake --build build -j
 
       - name: Package project
         run: |
