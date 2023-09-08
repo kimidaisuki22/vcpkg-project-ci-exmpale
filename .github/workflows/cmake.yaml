@@ -59,9 +59,20 @@ jobs:
            echo "CC=${{ matrix.c_compiler }}" >> $GITHUB_ENV
            echo "CMAKE_BUILD_TYPE=${{ matrix.build_type }}" >> $GITHUB_ENV
 
+      - name: Set up CMAKE_GENERATOR
+        if: ${{ runner.os != 'Windows' }}
+        shell: bash
+        run: |
+           echo "CMAKE_GENERATOR=Ninja" >> $GITHUB_ENV
+
+
+
       - uses: actions/checkout@v3
         with:
           submodules: 'recursive'
+
+      - uses: kimidaisuki22/action-install-ninja@v1
+        if: ${{ runner.os != 'Windows' }}
 
       - name: Directly invoke `vcpkg install`
         run: |
