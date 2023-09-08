@@ -21,8 +21,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - uses: ./.github/workflows/install-ninja.yaml
+      - id: installing
+        uses: kimidaisuki22/action-install-ninja
 
       - name: Print Ninja version
         run: |
