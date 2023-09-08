@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  CMAKE_GENERATOR: Ninja   #  Ninja is not exist on ci.
+  # CMAKE_GENERATOR: Ninja   #  Ninja is not exist on ci.
   CMAKE_BUILD_TYPE: "Release"
 
 jobs:
@@ -63,7 +63,7 @@ jobs:
             vcpkg install
 
       - name: Build project
-        run: cmake -B build -S . && cmake --build build -j
+        run: cmake -B build -S . && cmake --build build -j --config Release
 
       - name: Package project
         run: |
