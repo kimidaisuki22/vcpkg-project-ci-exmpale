@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - id: installing
-        uses: kimidaisuki22/action-install-ninja
+        uses: kimidaisuki22/action-install-ninja@main
 
       - name: Print Ninja version
         run: |
