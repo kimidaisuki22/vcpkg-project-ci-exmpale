@@ -8,7 +8,6 @@ on:
 
 env:
   # CMAKE_GENERATOR: Ninja   #  Ninja is not exist on ci.
-  VCPKG_ROOT: "$VCPKG_INSTALLATION_ROOT"
   CMAKE_BUILD_TYPE: "Release"
 
 jobs:
@@ -51,6 +50,7 @@ jobs:
         shell: bash
         run: |
            echo "CMAKE_TOOLCHAIN_FILE=$VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" >> $GITHUB_ENV
+           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
            echo "CMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}" >> $GITHUB_ENV
            echo "CMAKE_C_COMPILER=${{ matrix.c_compiler }}" >> $GITHUB_ENV
 
