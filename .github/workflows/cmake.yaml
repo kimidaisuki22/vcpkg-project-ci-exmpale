@@ -18,7 +18,7 @@ jobs:
       - name: Set up env
         shell: bash
         run: |
-           echo "CMAKE_TOOLCHAIN_FILE=\"$VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake\"" >> $GITHUB_ENV
+           echo "CMAKE_TOOLCHAIN_FILE=$VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
         with:
