@@ -8,7 +8,7 @@ on:
 
 env:
   # CMAKE_GENERATOR: Ninja   #  Ninja is not exist on ci.
-  CMAKE_BUILD_TYPE: "Release"
+  SAY_HELLO_TO_NOT_USED: "Release"
 
 jobs:
   build:
@@ -51,8 +51,13 @@ jobs:
         run: |
            echo "CMAKE_TOOLCHAIN_FILE=$VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" >> $GITHUB_ENV
            echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
+
+      - name: Set up compiler env
+        shell: bash
+        run: |
            echo "CXX=${{ matrix.cpp_compiler }}" >> $GITHUB_ENV
            echo "CC=${{ matrix.c_compiler }}" >> $GITHUB_ENV
+           echo "CMAKE_BUILD_TYPE=${{ matrix.build_type }}" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3
         with:
@@ -63,7 +68,7 @@ jobs:
             vcpkg install
 
       - name: Build project
-        run: cmake -B build -S . && cmake --build build -j --config Release
+        run: cmake -B build -S . && cmake --build build -j --config ${{ matrix.build_type }}
 
       - name: Package project
         run: |
