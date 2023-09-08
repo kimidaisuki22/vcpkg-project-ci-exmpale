@@ -28,7 +28,7 @@ jobs:
       - name: Install Ninja(Linux)
         if: ${{ runner.os == 'Linux' }}
         run: |
-          apt-get install -y ninja-build
+          sudo apt-get install -y ninja-build
 
 
 
