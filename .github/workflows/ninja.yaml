@@ -20,22 +20,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-      - name: Install Ninja(windows)
-        if: ${{ runner.os == 'Windows' }}
-        run: |
-          choco install ninja
+      - uses: actions/checkout@v3
 
-      - name: Install Ninja(Linux)
-        if: ${{ runner.os == 'Linux' }}
-        run: |
-          sudo apt-get install -y ninja-build
-
-      - name: Install Ninja(macOS)
-        if: ${{ runner.os == 'macOS' }}
-        run: |
-          brew install ninja
-
-
+      - uses: ./.github/workflows/install-ninja.yaml
 
       - name: Print Ninja version
         run: |

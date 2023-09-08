@@ -1,0 +1,19 @@
+name: 'Ninja installer'
+description: 'Greet someone'
+runs:
+  using: "composite"
+  steps:
+    - name: Install Ninja(windows)
+      if: ${{ runner.os == 'Windows' }}
+      run: |
+        choco install ninja
+
+    - name: Install Ninja(Linux)
+      if: ${{ runner.os == 'Linux' }}
+      run: |
+        sudo apt-get install -y ninja-build
+
+    - name: Install Ninja(macOS)
+      if: ${{ runner.os == 'macOS' }}
+      run: |
+        brew install ninja
