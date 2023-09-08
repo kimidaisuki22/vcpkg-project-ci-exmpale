@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  # CMAKE_GENERATOR: Ninja   #  Ninja is not exist on ci.
+  CMAKE_GENERATOR: Ninja   #  Ninja is not exist on ci.
   CMAKE_BUILD_TYPE: "Release"
 
 jobs:
