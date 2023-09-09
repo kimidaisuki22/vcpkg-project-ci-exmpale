@@ -89,12 +89,12 @@ jobs:
         if: ${{ runner.os == 'Linux' }}
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.event.repository.name }}-${{ github.sha }}.tar.gz
+          name: ${{ github.event.repository.name }}-${{ matrix.os }}-${{ matrix.c_compiler }}-${{ github.sha }}.tar.gz
           path: build/*.tar.gz
 
       - name: Upload package(Windows)
         if: ${{ runner.os == 'Windows' }}
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.event.repository.name }}-${{ github.sha }}.exe
+          name: ${{ github.event.repository.name }}-${{ matrix.os }}-${{ matrix.c_compiler }}-${{ github.sha }}.exe
           path: build/*.exe
