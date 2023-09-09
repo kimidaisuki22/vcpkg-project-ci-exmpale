@@ -19,12 +19,14 @@ install(TARGETS main
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
  )
-install(CODE [[
+
+function(install_dll target)
+set(TEMPLATE_STRING [[
  file(GET_RUNTIME_DEPENDENCIES
   RESOLVED_DEPENDENCIES_VAR seta
-  EXECUTABLES $<TARGET_FILE:main>
+  EXECUTABLES $<TARGET_FILE:@target@>
   PRE_EXCLUDE_REGEXES ext-ms-* api-ms-*
-  DIRECTORIES $<TARGET_FILE_DIR:main>
+  DIRECTORIES $<TARGET_FILE_DIR:@target@>
   )
 
    foreach(_file ${seta})
@@ -41,6 +43,12 @@ install(CODE [[
     message(WARNING "Unresolved dependencies detected!")
   endif()
 ]])
+
+string(REPLACE "@target@" "${target}" TEMPLATE_STRING "${TEMPLATE_STRING}")
+install(CODE ${TEMPLATE_STRING})
+endfunction()
+
+install_dll(main)
 install(RUNTIME_DEPENDENCY_SET  seta)
 # Guide: https://stackoverflow.com/questions/62884439/how-to-use-cmake-file-get-runtime-dependencies-in-an-install-statement
 
