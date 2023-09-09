@@ -49,7 +49,6 @@ install(CODE ${TEMPLATE_STRING})
 endfunction()
 
 install_dll(main)
-install(RUNTIME_DEPENDENCY_SET  seta)
 # Guide: https://stackoverflow.com/questions/62884439/how-to-use-cmake-file-get-runtime-dependencies-in-an-install-statement
 
 include(CPack)
