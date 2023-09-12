@@ -9,6 +9,7 @@ on:
 env:
   # CMAKE_GENERATOR: Ninja   #  Ninja is not exist on ci.
   SAY_HELLO_TO_NOT_USED: "Release"
+  CPACK_PACKAGE_DIRECTORY: "packages"
 
 jobs:
   build:
@@ -85,16 +86,10 @@ jobs:
         run: |
             cd build && cpack
 
-      - name: Upload package(Linux)
-        if: ${{ runner.os == 'Linux' }}
+      - name: Upload package
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.event.repository.name }}-${{ matrix.os }}-${{ matrix.c_compiler }}-${{ github.sha }}.tar.gz
-          path: build/*.tar.gz
-
-      - name: Upload package(Windows)
-        if: ${{ runner.os == 'Windows' }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ github.event.repository.name }}-${{ matrix.os }}-${{ matrix.c_compiler }}-${{ github.sha }}.exe
-          path: build/*.exe
+          path: |
+            build/packages/
+            !build/packages/_CPack_Packages
