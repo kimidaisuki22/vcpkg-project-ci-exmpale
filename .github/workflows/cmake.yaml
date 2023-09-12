@@ -9,7 +9,7 @@ on:
 env:
   # CMAKE_GENERATOR: Ninja   #  Ninja is not exist on ci.
   SAY_HELLO_TO_NOT_USED: "Release"
-  CPACK_PACKAGE_DIRECTORY: "packages"
+
 
 jobs:
   build:
@@ -84,7 +84,7 @@ jobs:
 
       - name: Package project
         run: |
-            cd build && cpack
+            cd build && cpack -DCPACK_PACKAGE_DIRECTORY=packages
 
       - name: Upload package
         uses: actions/upload-artifact@v2
