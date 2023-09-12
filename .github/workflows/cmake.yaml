@@ -80,11 +80,11 @@ jobs:
             vcpkg install
 
       - name: Build project
-        run: cmake -B build -S . && cmake --build build -j --config ${{ matrix.build_type }}
+        run: cmake -B build -DCPACK_PACKAGE_DIRECTORY=packages -S . && cmake --build build -j --config ${{ matrix.build_type }}
 
       - name: Package project
         run: |
-            cd build && cpack -DCPACK_PACKAGE_DIRECTORY=packages
+            cd build && cpack
 
       - name: Upload package
         uses: actions/upload-artifact@v2
