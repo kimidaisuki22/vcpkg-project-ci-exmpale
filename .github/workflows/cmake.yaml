@@ -47,12 +47,6 @@ jobs:
           - os: ubuntu-latest
             c_compiler: cl
     steps:
-      - name: Set up env
-        shell: bash
-        run: |
-           echo "CMAKE_TOOLCHAIN_FILE=$VCPKG_INSTALLATION_ROOT/scripts/buildsystems/vcpkg.cmake" >> $GITHUB_ENV
-           echo "VCPKG_ROOT=$VCPKG_INSTALLATION_ROOT" >> $GITHUB_ENV
-
       - name: Set up compiler env
         shell: bash
         run: |
@@ -75,21 +69,4 @@ jobs:
       - uses: kimidaisuki22/action-install-ninja@v1
         if: ${{ runner.os != 'Windows' }}
 
-      - name: Directly invoke `vcpkg install`
-        run: |
-            vcpkg install
-
-      - name: Build project
-        run: cmake -B build -DCPACK_PACKAGE_DIRECTORY=packages -S . && cmake --build build -j --config ${{ matrix.build_type }}
-
-      - name: Package project
-        run: |
-            cd build && cpack
-
-      - name: Upload package
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ github.event.repository.name }}-${{ matrix.os }}-${{ matrix.c_compiler }}-${{ github.sha }}.tar.gz
-          path: |
-            build/packages/
-            !build/packages/_CPack_Packages
+      - uses: kimidaisuki22/action-build-with-vcpkg@v1
